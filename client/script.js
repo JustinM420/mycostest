@@ -79,7 +79,7 @@ const handleSubmit = async (e) => {
 
   // fetch data from server -> bot's response
 
-  const response = await fetch('http://localhost:5500', {
+  const response = await fetch('https://mycos.onrender.com', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
