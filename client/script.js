@@ -4,6 +4,8 @@ import user from './assets/user.svg';
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
 
+let conversationHistory = [];
+
 let loadInterval;
 
 function loader(element) {
@@ -60,10 +62,13 @@ function chatStripe (isAi, value, uniqueId) {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  const data =new FormData(form);
+  const data = new FormData(form);
+
+  const userInput = data.get('prompt');
+  conversationHistory.push({ role: 'user', content: userInput });
 
   // User's chat stripe
-  chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
+  chatContainer.innerHTML += chatStripe(false, userInput);
 
   form.reset();
 
@@ -73,28 +78,34 @@ const handleSubmit = async (e) => {
 
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
-  const messageDiv =document.getElementById(uniqueId);
+  const messageDiv = document.getElementById(uniqueId);
 
   loader(messageDiv);
 
-  // fetch data from server -> bot's response
+  // Combine conversation history and the new user input into a single string
+  const historyText = conversationHistory
+    .map((message) => `${message.role === 'user' ? 'User:' : 'Bot:'} ${message.content}`)
+    .join('\n') + `\nUser: ${userInput}`;
 
+  // fetch data from server -> bot's response
   const response = await fetch('https://mycos.onrender.com', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      prompt: data.get('prompt')
+      historyText: historyText
     })
-  })
+  });
 
   clearInterval(loadInterval);
   messageDiv.innerHTML = '';
 
-  if(response.ok) {
+  if (response.ok) {
     const data = await response.json();
     const parsedData = data.bot.trim();
+
+    conversationHistory.push({ role: 'bot', content: parsedData }); // Update conversation history
 
     typeText(messageDiv, parsedData);
   } else {
@@ -105,6 +116,7 @@ const handleSubmit = async (e) => {
     alert(err);
   }
 }
+
 
 form.addEventListener('submit', handleSubmit);
 form.addEventListener('keyup', (e) => {
