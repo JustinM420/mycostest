@@ -8,14 +8,27 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Mycos Ai</h1>
-    <div id="app">
-      <div id="chat_container"></div>
-      <form class ="bottom-form">
-        <textarea name ="prompt" rows="1" cols="1" placeholder="Ask Mycos..."></textarea>
-        <button type="submit"><img src="assets/send.svg" /></button>
-      </form>
-    </div>
+      <header class="header">
+        <div class="logo">Mycos Ai</div>
+        <nav class="nav-menu">
+          <a href="#">Contact</a>
+          <button style="margin-left: 20px;" class="sign-up-button">Sign Up / Log In</button>
+        </nav>
+      </header>
+  
+    <main>
+      <div id="app">
+        <div id="chat_container"></div>
+        <form class ="bottom-form">
+          <textarea name ="prompt" rows="1" cols="1" placeholder="Ask Mycos About Cannabis..."></textarea>
+          <button type="submit"><img src="assets/send.svg" /></button>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <!-- Footer content goes here -->
+    </footer>
 
     <script type="module" src="script.js"></script>
   </body>
