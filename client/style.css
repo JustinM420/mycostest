@@ -114,15 +114,28 @@ body {
 
 form {
   width: 100%;
-  max-width: 1280px;
   margin: 0 auto;
   padding: 10px;
   background: #40414F;
-
   display: flex;
   flex-direction: row;
   gap: 10px;
 }
+
+.bottom-form {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px;
+  background: #40414F;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 
 textarea {
   width: 100%;
