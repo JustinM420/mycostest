@@ -29,6 +29,12 @@ body {
   color: #ffffff;
 }
 
+@media screen and (max-width: 768px) {
+  .logo {
+    font-size: 30px; /* or any other font size you prefer */
+  }
+}
+
 .nav-menu {
   display: flex;
   align-items: center;
