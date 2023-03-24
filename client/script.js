@@ -72,7 +72,7 @@ const handleSubmit = async (e) => {
 
   form.reset();
 
-  //Bot's chatstripe
+  //Mycos's chatstripe
   const uniqueId = generateUniqueId();
   chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
 
@@ -84,10 +84,10 @@ const handleSubmit = async (e) => {
 
   // Combine conversation history and the new user input into a single string
   const historyText = conversationHistory
-    .map((message) => `${message.role === 'user' ? 'User:' : 'Bot:'} ${message.content}`)
+    .map((message) => `${message.role === 'user' ? 'User:' : 'Mycos:'} ${message.content}`)
     .join('\n') + `\nUser: ${userInput}`;
 
-  // fetch data from server -> bot's response
+  // fetch data from server -> Mycos's response
   const response = await fetch('https://mycos.onrender.com', {
     method: 'POST',
     headers: {
@@ -105,7 +105,7 @@ const handleSubmit = async (e) => {
     const data = await response.json();
     const parsedData = data.bot.trim();
 
-    conversationHistory.push({ role: 'bot', content: parsedData }); // Update conversation history
+    conversationHistory.push({ role: 'Mycos', content: parsedData }); // Update conversation history
 
     typeText(messageDiv, parsedData);
   } else {
